@@ -1,5 +1,11 @@
 import os
 import gradio as gr
+from google import genai
+from dotenv import load_dotenv
+
+load_dotenv()
+
+client = genai.Client()
 
 with gr.Blocks(title="Zero-shot Text Generation") as demo:
     gr.Markdown("# Zero-shot Text Generation (Interactions API)")
@@ -23,7 +29,11 @@ with gr.Blocks(title="Zero-shot Text Generation") as demo:
 
     @input_text.submit(inputs=input_text, outputs=[input_text, output_text])
     def generate_text(input_str: str):
-        
-        return None, f"## {input_str}\n\n"
+
+        interaction = client.interactions.create(
+            model="gemini-3.5-flash",
+            input=input_str
+        )
+        return None, f"## {input_str}\n\n{interaction.output_text}"
 
 demo.launch()
