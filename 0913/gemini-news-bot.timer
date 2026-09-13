@@ -1,0 +1,14 @@
+[Unit]
+Description=Gemini News Bot Timer - 每 1 分鐘執行一次 (測試用)
+Requires=gemini-news-bot.service
+
+[Timer]
+# 系統啟動後 30 秒開始首次執行
+OnBootSec=30sec
+# 每隔 1 分鐘執行一次
+OnUnitActiveSec=1min
+# 如果錯過執行時間(如系統關機),開機後補執行
+Persistent=true
+
+[Install]
+WantedBy=timers.target
