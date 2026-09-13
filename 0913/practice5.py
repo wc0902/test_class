@@ -46,7 +46,7 @@ def analyze_customer_message(user_message: str) -> dict:
 
     # 2. 呼叫模型並要求 JSON 格式輸出
     response = client.models.generate_content(
-        model="gemini-3.8-flash",
+        model="gemini-3.6-flash",
         contents=user_message,
         config=types.GenerateContentConfig(
             system_instruction=system_instruction,
@@ -65,6 +65,7 @@ if __name__ == "__main__":
         "請問我的訂單 #883921 什麼時候會出貨呢?謝謝!",
         "你們的APP到底怎麼回事?一直閃退,付了錢什麼都不能用,再不處理我就找消保官!",
         "包裹收到了,包裝很完整,速度也很快~"
+        
     ]
 
     for msg in test_messages:
